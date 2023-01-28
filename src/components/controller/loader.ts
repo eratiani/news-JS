@@ -1,17 +1,17 @@
 class Loader {
     baseLink: string;
     options: object;
-    constructor(baseLink, options) {
+    constructor(baseLink:string, options:object) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
         { endpoint, options = {} },
-        callback = () => {
+        callback = ():void => {
             console.error('No callback for GET response');
         }
-    ) {
+    ):void {
         this.load('GET', endpoint, callback, options);
     }
 
@@ -36,7 +36,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method, endpoint, callback, options = {}) {
+    load(method, endpoint, callback:Function, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
