@@ -1,7 +1,15 @@
 import './sources.css';
-
+export interface ResSources {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
+}
 class Sources {
-    draw(data) {
+    draw(data:Array<ResSources>) {
         console.log(data);
         
         const fragment = document.createDocumentFragment();
