@@ -10,8 +10,6 @@ export interface ResSources {
 }
 class Sources {
     draw(data:Array<ResSources>) {
-        console.log(data);
-        
         const fragment = document.createDocumentFragment();
         const sourceItemTemp:HTMLElement | null = document.querySelector('#sourceItemTemp');
 
