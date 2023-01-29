@@ -1,8 +1,7 @@
-import { drawNews, drawSources } from '../view/appView';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: ((data:drawSources) => void) | undefined) {
+    getSources(callback: (() => void) | undefined) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -11,16 +10,16 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: ((data:drawNews) => void) | undefined) {
+    getNews(e: Event, callback: (() => void) | undefined) {
         let target = e.target as HTMLElement | null;
         const newsContainer = e.currentTarget as HTMLElement | null;
 
         while (target !== newsContainer) {
             if (target && target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
-                if (sourceId && newsContainer && newsContainer.getAttribute('data-source') !== sourceId) {
+                const sourceId = target.getAttribute('data-source-id')!;
+                if (newsContainer && newsContainer!.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getArticles(
+                    super.getResp(
                         {
                             endpoint: 'everything',
                             options: {
